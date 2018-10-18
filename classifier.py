@@ -23,11 +23,12 @@ year = "2018"
 
 # Main Program
 #Open file in read & write mode
-with open('datasetcompleto.csv', 'r') as f, open('alert_edited2.csv', 'a') as f_out:
+with open('alert.csv', 'r') as f, open('alert_edited2.csv', 'a') as f_out:
     reader = csv.DictReader(f)
     writer = csv.DictWriter(f_out, fieldnames=reader.fieldnames)
     writer.writeheader()  # For writing header
     data = [r for r in reader]
+    print("******Processing data, please wait******")
 #While to edit row by row into the csv file
     while data:
         tempo = data[x]['timestamp']
