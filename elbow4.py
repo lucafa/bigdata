@@ -11,9 +11,11 @@ from scipy.spatial.distance import cdist
 plt.style.use('seaborn-whitegrid')
 #%matplotlib inline
 
-data = pd.read_csv("dataset_port_dgmlen_iplen_complete.csv")
+data = pd.read_csv("alert_edited2.csv")
 print("******DATA_SET******")
-
+tempo=data['timestamp']
+print(tempo)
+print(type(tempo))
 #Verify missing values present in the data
 #print(data.isna().head())
 
@@ -28,7 +30,10 @@ data2=data.fillna(1)
 
 #Find right K with elbow method
 # create new plot and data
-x1=np.array(data2.drop(['iplen','dgmlen','dst_port'],1).astype(float))
+#x1=np.array(data2.drop(['iplen','dgmlen','dst_port'],1).astype(float))
+#x2=np.array(data2['dst_port'])
+
+x1=np.array(data2['timestamp'])
 x2=np.array(data2['dst_port'])
 
 plt.plot()
@@ -55,10 +60,14 @@ plt.show()
 
 
 #Kmeans algorithm
-X=np.array(data2.drop(['iplen','dgmlen','dst_port'],1).astype(float))
+#X=np.array(data2.drop(['iplen','dgmlen','dst_port'],1).astype(float))
+
+#X=np.array(data2.drop(['sig generator','sig_id','sig_rev','msg','proto','src','src_port','dst','dst_port','ethsrc','ethdst','ethlen','txpflags','tcpseq','tcppack','tcplen','tcpwindow','ttl','tos','id','dgmlen','iplen','icmptype','icmp code','icmp_id','icmp_seq'],1).astype(float))
+
+X=np.array(data2.drop(['sig generator','sig_id','sig_rev','msg','proto','src','dst','dst_port','ethsrc','ethdst','ethlen','txpflags','tcpseq','tcppack','tcplen','tcpwindow','ttl','tos','id','dgmlen','iplen','icmptype','icmp code','icmp_id','icmp_seq'],1).astype(float))
 y=np.array(data2['dst_port'])
 
-kmeans = KMeans(n_clusters=2) # You want cluster the passenger records into 2: Survived or Not survived
+kmeans = KMeans(n_clusters=4) # You want cluster the passenger records into 2: Survived or Not survived
 kmeans.fit(X)
 y_kmeans = kmeans.predict(X)
 plt.scatter(X[:, 0], X[:, -1], c=y_kmeans, s=50, cmap='viridis')

@@ -1,0 +1,2 @@
+'timestamp','sig generator','sig_id','sig_rev','msg','proto','src','src_port','dst','dst_port','ethsrc','ethdst','ethlen','txpflags','tcpseq','tcppack','tcplen','tcpwindow','ttl','tos','id','dgmlen','iplen','icmptype','icmp code','icmp_id','icmp_seq'
+
